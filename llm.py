@@ -588,14 +588,16 @@ class Chat:
                     # Use the simplest possible client initialization for Perplexity
                     openai_client = OpenAI(
                         api_key=self.apikey,
-                        base_url="https://api.perplexity.ai"
+                        base_url="https://api.perplexity.ai",
+                        default_headers={"X-Pplx-Integration": "comfyui-llm-party"},
                     )
                 except Exception as e:
                     print(f"Error initializing Perplexity client: {e}")
                     # Fallback to standard initialization
                     openai_client = OpenAI(
                         api_key=self.apikey,
-                        base_url=self.baseurl
+                        base_url=self.baseurl,
+                        default_headers={"X-Pplx-Integration": "comfyui-llm-party"},
                     )
             elif "openai.azure.com" in self.baseurl:
                 # 获取API版本

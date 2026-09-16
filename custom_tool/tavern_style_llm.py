@@ -330,7 +330,11 @@ class TavernStyleLLM:
             baseurl = _ensure_version_suffix(getattr(model, "baseurl", ""))
 
             if "api.perplexity.ai" in baseurl:
-                client = OpenAI(api_key=apikey, base_url="https://api.perplexity.ai")
+                client = OpenAI(
+                    api_key=apikey,
+                    base_url="https://api.perplexity.ai",
+                    default_headers={"X-Pplx-Integration": "comfyui-llm-party"},
+                )
             elif "openai.azure.com" in baseurl:
                 api_version = baseurl.split("=")[-1].split("/")[0]
                 azure_endpoint = "https://" + baseurl.split("//")[1].split("/")[0]
